@@ -182,6 +182,7 @@
 
 
 
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data schoonmaken</a></li>
 </ul>
 
@@ -463,6 +464,7 @@ document.write(`
 <span class="c1"># Extract the Year and Lung cancer columns</span>
 <span class="n">year_lung_cancer</span> <span class="o">=</span> <span class="n">cancer_data</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s2">&quot;Tracheal, bronchus, and lung cancer &quot;</span><span class="p">]]</span>
 <span class="n">year_total_emissions</span> <span class="o">=</span> <span class="n">emissions_data</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Total&#39;</span><span class="p">]]</span>
+<span class="n">year_total_emissions</span> <span class="o">=</span> <span class="n">year_total_emissions</span><span class="p">[</span><span class="n">year_total_emissions</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2016</span><span class="p">]</span>
 
 <span class="c1"># Sla de opgeschoonde data op</span>
 <span class="n">output_file_cancer</span> <span class="o">=</span> <span class="s1">&#39;csv/df/cancer_cleaned_data.csv&#39;</span>
@@ -504,10 +506,12 @@ document.write(`
 
 <span class="c1"># Merge the lung cancer data with population data using country names and years</span>
 <span class="n">df_lung_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
+<span class="n">df_lung_merged</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="p">[(</span><span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
 <span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Tracheal, bronchus, and lung cancer&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
 
 <span class="c1"># Merge the emissions data with population data using country names and years</span>
 <span class="n">df_emissions_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_emissions</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
+<span class="n">df_emissions_merged</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="p">[(</span><span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
 <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
 
 <span class="c1"># Aggregate data by country and code</span>
