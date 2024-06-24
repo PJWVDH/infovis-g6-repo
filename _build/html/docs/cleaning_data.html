@@ -413,6 +413,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-schoonmaken">
 <h1>Data schoonmaken<a class="headerlink" href="#data-schoonmaken" title="Link to this heading">#</a></h1>
+<p>In deze file worden alle dataframes per grafiek schoongemaakt en geexporteerd als csv’s, zodat de Datastory goed leesbaar blijft.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -600,6 +601,95 @@ document.write(`
 <span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
 <span class="n">output_file_grouped</span> <span class="o">=</span> <span class="s1">&#39;csv/df/grouped_df.csv&#39;</span>
+<span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_grouped</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># chloropleth rokers </span>
+
+<span class="c1"># Load the smoking data CSV file</span>
+<span class="n">smoking_file_path</span> <span class="o">=</span> <span class="s1">&#39;csv/smoking.csv&#39;</span>
+<span class="n">smoking_data</span> <span class="o">=</span> <span class="n">smoking_df</span>
+
+<span class="c1"># Load the population data CSV file</span>
+<span class="n">population_file_path</span> <span class="o">=</span> <span class="s1">&#39;csv/Population.csv&#39;</span>
+<span class="n">population_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">population_file_path</span><span class="p">)</span>
+
+<span class="c1"># Standardize country names using a mapping dictionary</span>
+<span class="n">country_name_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;United States of America&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span> <span class="s1">&#39;Russia&#39;</span><span class="p">,</span>
+    <span class="c1"># Add more mappings as needed</span>
+<span class="p">}</span>
+
+<span class="c1"># Apply country name mapping to smoking data</span>
+<span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
+
+<span class="c1"># Apply country name mapping to population data</span>
+<span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
+
+
+<span class="c1"># Remove commas from the &#39;Population&#39; column and convert to numeric</span>
+<span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># # Convert the &#39;Population&#39; column to numeric, forcing errors to NaN</span>
+<span class="c1"># population_data[&#39;PopTotal&#39;] = pd.to_numeric(population_data[&#39;PopTotal&#39;], errors=&#39;coerce&#39;)</span>
+
+<span class="c1"># Filter smoking data for the years 2000 to 2012</span>
+<span class="n">filtered_smoking_data</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
+
+<span class="c1"># Group by country and calculate the average number of smokers</span>
+<span class="n">avg_smokers</span> <span class="o">=</span> <span class="n">filtered_smoking_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Calculate the average population for the same period</span>
+<span class="n">filtered_population_data</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[(</span><span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
+<span class="n">avg_population</span> <span class="o">=</span> <span class="n">filtered_population_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">)[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Rename columns to facilitate merging</span>
+<span class="n">avg_population</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Location&#39;</span><span class="p">:</span> <span class="s1">&#39;Country&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Merge the average smokers and average population dataframes on the country column</span>
+<span class="n">merged_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">avg_smokers</span><span class="p">,</span> <span class="n">avg_population</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+
+<span class="c1"># Calculate smokers per capita</span>
+<span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Smokers_Per_Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
+
+<span class="n">output_file_merged</span> <span class="o">=</span> <span class="s1">&#39;csv/df/merged_smokers_df.csv&#39;</span>
+<span class="n">merged_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_merged</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># correlatie plot roken en longkanker</span>
+
+<span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
+<span class="c1"># Filter data to include only years 2000-2012</span>
+<span class="n">df_smoking_filtered</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
+
+<span class="c1"># Extract relevant columns</span>
+<span class="n">df_smoking_relevant</span> <span class="o">=</span> <span class="n">df_smoking_filtered</span><span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]]</span>
+
+
+<span class="c1"># Merge datasets on Country and Year</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung_relevant</span><span class="p">,</span> <span class="n">df_smoking_relevant</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_merged</span><span class="p">,</span> <span class="n">df_population_relevant</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
+
+<span class="c1"># Calculate per capita values</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;Tracheal, bronchus, and lung cancer&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
+
+<span class="c1"># Select only the numeric columns</span>
+<span class="n">df_numeric</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">,</span> <span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Group by Year and average the per capita values</span>
+<span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">output_file_grouped</span> <span class="o">=</span> <span class="s1">&#39;csv/df/grouped_smokers_df.csv&#39;</span>
 <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_grouped</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
