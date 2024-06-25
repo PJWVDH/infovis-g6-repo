@@ -180,12 +180,6 @@
 
 
 
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="reflectie.html">Reflectie</a></li>
 
 
@@ -673,7 +667,7 @@ Discrete / Interval variabelen: Jaar</p>
 <span class="n">df_smoking_filtered</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
 
 <span class="c1"># Extract relevant columns</span>
-<span class="n">df_smoking_relevant</span> <span class="o">=</span> <span class="n">df_smoking_filtered</span><span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]]</span>
+<span class="n">df_smoking_relevant</span> <span class="o">=</span> <span class="n">df_smoking_filtered</span><span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Data.Daily cigarettes&#39;</span><span class="p">]]</span>
 
 
 <span class="c1"># Merge datasets on Country and Year</span>
@@ -683,9 +677,9 @@ Discrete / Interval variabelen: Jaar</p>
 <span class="c1"># Calculate per capita values</span>
 <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;Tracheal, bronchus, and lung cancer&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
 <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
-
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">df_merged</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Data.Daily cigarettes&#39;</span><span class="p">:</span> <span class="s1">&#39;CigarettesPerCapita&#39;</span><span class="p">})</span>
 <span class="c1"># Select only the numeric columns</span>
-<span class="n">df_numeric</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">,</span> <span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">]]</span>
+<span class="n">df_numeric</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">,</span> <span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">,</span> <span class="s1">&#39;CigarettesPerCapita&#39;</span><span class="p">]]</span>
 
 <span class="c1"># Group by Year and average the per capita values</span>
 <span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df_numeric</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
