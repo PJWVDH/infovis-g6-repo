@@ -61,7 +61,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Datastory Trachea-, bronchiën- en longkanker" href="notebook.html" />
+    <link rel="next" title="Datastory Trachea-, bronchiën- en longkanker" href="notebook.html" />
+    <link rel="prev" title="Datastory" href="home.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -172,6 +173,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data schoonmaken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebook.html">Datastory Trachea-, bronchiën- en longkanker</a></li>
 
 
@@ -183,7 +185,10 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data schoonmaken</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="reflectie.html">Reflectie</a></li>
+
+
 </ul>
 
     </div>
@@ -415,6 +420,10 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="data-schoonmaken">
 <h1>Data schoonmaken<a class="headerlink" href="#data-schoonmaken" title="Link to this heading">#</a></h1>
 <p>In deze file worden alle dataframes per grafiek schoongemaakt en geexporteerd als csv’s, zodat de Datastory goed leesbaar blijft.</p>
+<p>De variabelen die we gebruiken zijn:
+Continuous / Ratio variabelen: Rokers, TBL-Kanker, Emissies
+Discrete / Nominale variabelen: Land
+Discrete / Interval variabelen: Jaar</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -490,14 +499,15 @@ document.write(`
 <span class="n">df_emissions</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_emissions</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="n">df_population</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_population</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-<span class="c1"># Ensure correct data types for population columns</span>
-<span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="c1"># # Ensure correct data types for population columns</span>
+<span class="c1"># df_population[&#39;PopTotal&#39;] = df_population[&#39;PopTotal&#39;].str.replace(&#39;,&#39;, &#39;&#39;).astype(float)</span>
+
 
 <span class="c1"># Standardize country names using a mapping dictionary</span>
 <span class="n">country_name_mapping</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span> <span class="s1">&#39;Russia&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;United States of America&#39;</span><span class="p">:</span> <span class="s1">&#39;United States&#39;</span><span class="p">,</span>
     <span class="s1">&#39;United States of America&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;United States&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span>
     <span class="c1"># Add other mappings if necessary</span>
 <span class="p">}</span>
 
@@ -532,16 +542,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df&#39;s voor India/USA plot</span>
-
-<span class="n">country_name_mapping</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span> <span class="s1">&#39;Russia&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;United States of America&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;United States&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span>
-    <span class="c1"># Add other mappings if necessary</span>
-<span class="p">}</span>
-
-<span class="c1"># Apply the mapping to the emissions dataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the mapping to the emissions dataset</span>
 <span class="n">df_emissions</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_emissions</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
 
 <span class="c1"># Apply the mapping to the lung cancer dataset</span>
@@ -634,10 +635,6 @@ document.write(`
 
 <span class="c1"># Apply country name mapping to population data</span>
 <span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
-
-
-<span class="c1"># Remove commas from the &#39;Population&#39; column and convert to numeric</span>
-<span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="c1"># # Convert the &#39;Population&#39; column to numeric, forcing errors to NaN</span>
 <span class="c1"># population_data[&#39;PopTotal&#39;] = pd.to_numeric(population_data[&#39;PopTotal&#39;], errors=&#39;coerce&#39;)</span>
@@ -732,13 +729,22 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notebook.html"
+       href="home.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Datastory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="notebook.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Datastory Trachea-, bronchiën- en longkanker</p>
       </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
