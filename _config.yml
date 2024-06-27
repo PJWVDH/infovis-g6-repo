@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Longkanker en Luchtvervuiling # Change this to your book title.
+title: Tbl-kanker, Luchtvervuiling en Roken # Change this to your book title.
 author: Berend, Stef, Wijnand # Change this to your name (or your team/organization name).
 
 # Force re-execution of notebooks on each build.
