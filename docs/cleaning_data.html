@@ -619,10 +619,12 @@ Discrete / Interval variabelen: Jaar</p>
 
 <span class="c1"># Standardize country names using a mapping dictionary</span>
 <span class="n">country_name_mapping</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;United States of America&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span><span class="p">,</span>
     <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span> <span class="s1">&#39;Russia&#39;</span><span class="p">,</span>
-    <span class="c1"># Add more mappings as needed</span>
+    <span class="s1">&#39;United States of America&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;United States&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span>
+    <span class="c1"># Add other mappings if necessary</span>
 <span class="p">}</span>
+
 
 <span class="c1"># Apply country name mapping to smoking data</span>
 <span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
