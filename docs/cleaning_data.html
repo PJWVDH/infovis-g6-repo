@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data schoonmaken &#8212; Longkanker en Luchtvervuiling</title>
+    <title>Data schoonmaken &#8212; Tbl-kanker, Luchtvervuiling en Roken</title>
   
   
   
@@ -148,7 +148,7 @@
   
   
   
-    <p class="title logo__title">Longkanker en Luchtvervuiling</p>
+    <p class="title logo__title">Tbl-kanker, Luchtvervuiling en Roken</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -174,6 +174,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data schoonmaken</a></li>
+
+
 <li class="toctree-l1"><a class="reference internal" href="notebook.html">Datastory Trachea-, bronchiën- en longkanker</a></li>
 
 
@@ -386,7 +388,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -402,6 +406,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Data schoonmaken</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-inladen">Data inladen</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-opschonen">Data opschonen</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vergelijking-uitstoot-en-tbl-kanker">Vergelijking uitstoot en TBL Kanker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wereldkaartplots-en-usa-india-vergelijkingsplot">Wereldkaartplots en USA/India vergelijkingsplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlatieplot-emissie-en-tbl-kanker">Correlatieplot Emissie en TBL-kanker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlatieplot-roken-en-longkanker">Correlatieplot roken en longkanker</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -440,34 +461,30 @@ Discrete / Interval variabelen: Jaar</p>
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-inladen">
+<h1>Data inladen<a class="headerlink" href="#data-inladen" title="Link to this heading">#</a></h1>
+<p>Eerst worden de juiste datasets ingeladen, dit zijn de vier boven benoemde datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Cancer Data Set</span>
-<span class="n">cancer_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;csv/CancerDeaths.csv&quot;</span><span class="p">)</span>
-<span class="c1"># print(&quot;Cancer Data Set&quot;)</span>
-<span class="c1"># display(cancer_df.head(n=5))</span>
-
-<span class="c1"># Load the Emissions Data Set</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cancer_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;csv/CancerDeaths.csv&quot;</span><span class="p">)</span>
 <span class="n">emissions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;csv/Emissions.csv&quot;</span><span class="p">)</span>
-<span class="c1"># print(&quot;Emissions Data Set&quot;)</span>
-<span class="c1"># display(emissions_df.iloc[250:255])</span>
-
-<span class="c1"># Load the Population Data Set</span>
 <span class="n">population_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;csv/Population.csv&quot;</span><span class="p">)</span>
-<span class="c1"># print(&quot;Population Data Set&quot;)</span>
-<span class="c1"># display(population_df.head(n=5))</span>
-
-<span class="c1"># Load the Smoking Data Set</span>
 <span class="n">smoking_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;csv/smoking.csv&quot;</span><span class="p">)</span>
-<span class="c1"># print(&quot;Smoking Data Set&quot;)</span>
-<span class="c1"># display(smoking_df.head(n=5))</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-opschonen">
+<h1>Data opschonen<a class="headerlink" href="#data-opschonen" title="Link to this heading">#</a></h1>
+<p>Hieronder worden de datasets ‘schoongemaakt’ en opgeslagen in het csv mapje.</p>
+<section id="vergelijking-uitstoot-en-tbl-kanker">
+<h2>Vergelijking uitstoot en TBL Kanker<a class="headerlink" href="#vergelijking-uitstoot-en-tbl-kanker" title="Link to this heading">#</a></h2>
+<p>Onderstaande dataset wordt gecleaned op de datasets van TBL-kanker en Totale emissies. Het wordt vervolgens gecombineerd tot de file ‘emissions_cancer_merged’. Deze zal gebruikt worden voor de subplots. De variabelen die gemerged worden zijn ‘Year’, ‘Tracheal, bronchus, and lung cancer ‘, en ‘Total’ (totale emissies).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df&#39;s voor Grafiek 1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df voor uitstoot en TBL</span>
 
 <span class="c1"># Filter the DataFrame for the desired country and year range</span>
 <span class="n">cancer_country</span> <span class="o">=</span> <span class="s1">&#39;World&#39;</span>  <span class="c1"># Replace with the desired country code</span>
@@ -475,41 +492,104 @@ Discrete / Interval variabelen: Jaar</p>
 
 <span class="n">cancer_data</span> <span class="o">=</span> <span class="n">cancer_df</span><span class="p">[(</span><span class="n">cancer_df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cancer_country</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cancer_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2001</span><span class="p">)]</span>
 <span class="n">emissions_data</span> <span class="o">=</span> <span class="n">emissions_df</span><span class="p">[(</span><span class="n">emissions_df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">emissions_country</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">emissions_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2001</span><span class="p">)]</span>
-
+<span class="n">cancer_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="c1"># Extract the Year and Lung cancer columns</span>
-<span class="n">year_lung_cancer</span> <span class="o">=</span> <span class="n">cancer_data</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s2">&quot;Tracheal, bronchus, and lung cancer &quot;</span><span class="p">]]</span>
+<span class="n">year_lung_cancer</span> <span class="o">=</span> <span class="n">cancer_data</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Tracheal, bronchus, and lung cancer &#39;</span><span class="p">]]</span>
 <span class="n">year_lung_cancer</span> <span class="o">=</span> <span class="n">year_lung_cancer</span><span class="p">[</span><span class="n">year_lung_cancer</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">]</span>
 
 <span class="n">year_total_emissions</span> <span class="o">=</span> <span class="n">emissions_data</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Total&#39;</span><span class="p">]]</span>
 <span class="n">year_total_emissions</span> <span class="o">=</span> <span class="n">year_total_emissions</span><span class="p">[</span><span class="n">year_total_emissions</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">]</span>
 
+<span class="n">year_total_output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">year_lung_cancer</span><span class="p">,</span> <span class="n">year_total_emissions</span><span class="p">)</span>
+
 <span class="c1"># Sla de opgeschoonde data op</span>
-<span class="n">output_file_cancer</span> <span class="o">=</span> <span class="s1">&#39;csv/df/cancer_cleaned_data.csv&#39;</span>
-<span class="n">output_file_emissions</span> <span class="o">=</span> <span class="s1">&#39;csv/df/emissions_cleaned_data.csv&#39;</span>
-<span class="n">year_lung_cancer</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_cancer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">year_total_emissions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_emissions</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">output_file_total</span> <span class="o">=</span> <span class="s1">&#39;csv/df/emissions_cancer_merged.csv&#39;</span>
+
+<span class="n">year_total_output</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_total</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">year_total_output</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Tracheal, bronchus, and lung cancer</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2001</td>
+      <td>1306846.723</td>
+      <td>25668.048326</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2002</td>
+      <td>1340682.674</td>
+      <td>26281.037468</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2003</td>
+      <td>1365249.848</td>
+      <td>27651.596453</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2004</td>
+      <td>1393709.471</td>
+      <td>28636.695037</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2005</td>
+      <td>1432109.236</td>
+      <td>29614.602256</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
+</section>
+<section id="wereldkaartplots-en-usa-india-vergelijkingsplot">
+<h2>Wereldkaartplots en USA/India vergelijkingsplot<a class="headerlink" href="#wereldkaartplots-en-usa-india-vergelijkingsplot" title="Link to this heading">#</a></h2>
+<p>De tweede dataset zal gebruikt worden voor de chloroplets en de vergelijking tussen USA en India. De overeenkomende variabelen waren ‘year’ en ‘country’, en uit de emissions-, cancer-, en smokingdataset worden respectievelijk ‘Data.Smokers.Total’, ‘Tracheal, bronchus, and lung cancer’ en ‘Total’ gehaald. Deze worden vervolgens per variabele gedeeld door de variabele ‘PopTotal’ van de populatie dataset. Dit hebben we gedaan zodat we de per capita values in de dataset konden zetten. Vervolgens hebben we het gemerged in de ‘combined’ dataset en opgeslagen als nieuwe csv.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df&#39;s voor Chloroplets</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data cleaning voor wereldkaartplots en USA/India vergelijkingsplot</span>
 
-<span class="c1"># Load the datasets</span>
 <span class="c1"># Load the datasets</span>
 <span class="n">df_lung</span> <span class="o">=</span> <span class="n">cancer_df</span>
 <span class="n">df_emissions</span> <span class="o">=</span> <span class="n">emissions_df</span>
 <span class="n">df_population</span> <span class="o">=</span> <span class="n">population_df</span>
+<span class="n">df_smoking</span> <span class="o">=</span> <span class="n">smoking_df</span>
 
 <span class="c1"># Strip any leading/trailing whitespace from column names</span>
 <span class="n">df_lung</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_lung</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="n">df_emissions</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_emissions</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 <span class="n">df_population</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_population</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-<span class="c1"># # Ensure correct data types for population columns</span>
-<span class="c1"># df_population[&#39;PopTotal&#39;] = df_population[&#39;PopTotal&#39;].str.replace(&#39;,&#39;, &#39;&#39;).astype(float)</span>
-
+<span class="n">df_smoking</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_smoking</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
 <span class="c1"># Standardize country names using a mapping dictionary</span>
 <span class="n">country_name_mapping</span> <span class="o">=</span> <span class="p">{</span>
@@ -519,46 +599,20 @@ Discrete / Interval variabelen: Jaar</p>
     <span class="c1"># Add other mappings if necessary</span>
 <span class="p">}</span>
 
-<span class="c1"># Apply the mapping to the population dataset</span>
-<span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
-
-<span class="c1"># Merge the lung cancer data with population data using country names and years</span>
-<span class="n">df_lung_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
-<span class="n">df_lung_merged</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="p">[(</span><span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
-<span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;Tracheal, bronchus, and lung cancer&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_lung_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
-
-<span class="c1"># Merge the emissions data with population data using country names and years</span>
-<span class="n">df_emissions_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_emissions</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
-<span class="n">df_emissions_merged</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="p">[(</span><span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
-<span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
-
-<span class="c1"># Aggregate data by country and code</span>
-<span class="n">df_lung_per_capita</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">])[</span><span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">df_emissions_per_capita</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;ISO 3166-1 alpha-3&#39;</span><span class="p">])[</span><span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
-<span class="c1"># Rename the columns for better readability</span>
-<span class="n">df_lung_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span>
-<span class="n">df_emissions_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span>
-
-<span class="n">output_file_lung</span> <span class="o">=</span> <span class="s1">&#39;csv/df/lung_per_capita.csv&#39;</span>
-<span class="n">output_file_emission</span> <span class="o">=</span> <span class="s1">&#39;csv/df/emissions_per_capita.csv&#39;</span>
-<span class="n">df_lung_per_capita</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_lung</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">df_emissions_per_capita</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_emission</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the mapping to the emissions dataset</span>
+<span class="c1"># Apply the mapping to the emissions dataset</span>
 <span class="n">df_emissions</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_emissions</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
 
 <span class="c1"># Apply the mapping to the lung cancer dataset</span>
 <span class="n">df_lung</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_lung</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
 
+<span class="n">df_smoking</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_smoking</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
+
+<span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
+
 <span class="c1"># Filter data to include only years 2001-2012</span>
 <span class="n">df_lung_filtered</span> <span class="o">=</span> <span class="n">df_lung</span><span class="p">[(</span><span class="n">df_lung</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_lung</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
 <span class="n">df_emissions_filtered</span> <span class="o">=</span> <span class="n">df_emissions</span><span class="p">[(</span><span class="n">df_emissions</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_emissions</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
+<span class="n">df_smoking_filtered</span> <span class="o">=</span> <span class="n">df_smoking</span><span class="p">[(</span><span class="n">df_smoking</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_smoking</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
 
 <span class="c1"># Merge the lung cancer data with population data</span>
 <span class="n">df_lung_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung_filtered</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
@@ -568,26 +622,109 @@ Discrete / Interval variabelen: Jaar</p>
 <span class="n">df_emissions_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_emissions_filtered</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
 <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_emissions_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
 
+<span class="c1"># Merge the smoking data with population data</span>
+<span class="n">df_smoking_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_smoking_filtered</span><span class="p">,</span> <span class="n">df_population</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">])</span>
+<span class="n">df_smoking_merged</span><span class="p">[</span><span class="s1">&#39;Smokers Per Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_smoking_merged</span><span class="p">[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_smoking_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
+
 <span class="c1"># Aggregate data by country, year, and code</span>
-<span class="n">df_lung_per_capita</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">])[</span><span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">df_emissions_per_capita</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;ISO 3166-1 alpha-3&#39;</span><span class="p">])[</span><span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_lung_per_capita</span> <span class="o">=</span> <span class="n">df_lung_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])[</span><span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_emissions_per_capita</span> <span class="o">=</span> <span class="n">df_emissions_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])[</span><span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_smoking_per_capita</span> <span class="o">=</span> <span class="n">df_smoking_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])[</span><span class="s1">&#39;Smokers Per Capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
 <span class="c1"># Rename the columns for better readability</span>
-<span class="n">df_lung_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span>
-<span class="n">df_emissions_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span>
+<span class="n">df_lung_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Lung Cancer Per Capita&#39;</span><span class="p">]</span>
+<span class="n">df_emissions_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Emissions Per Capita&#39;</span><span class="p">]</span>
+<span class="n">df_smoking_per_capita</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Smokers Per Capita&#39;</span><span class="p">]</span>
 
 <span class="c1"># Merge the two datasets on country code and year</span>
-<span class="n">df_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung_per_capita</span><span class="p">,</span> <span class="n">df_emissions_per_capita</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Code&#39;</span><span class="p">])</span>
+<span class="n">df_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung_per_capita</span><span class="p">,</span> <span class="n">df_emissions_per_capita</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
+<span class="n">df_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_combined</span><span class="p">,</span> <span class="n">df_smoking_per_capita</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
 
-<span class="n">output_file_combined</span> <span class="o">=</span> <span class="s1">&#39;csv/df/combined_usa_india.csv&#39;</span>
+<span class="n">output_file_combined</span> <span class="o">=</span> <span class="s1">&#39;csv/df/combined.csv&#39;</span>
 <span class="n">df_combined</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_combined</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df_combined</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Year</th>
+      <th>Lung Cancer Per Capita</th>
+      <th>Emissions Per Capita</th>
+      <th>Smokers Per Capita</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Afghanistan</td>
+      <td>2000</td>
+      <td>0.000071</td>
+      <td>5.358077e-08</td>
+      <td>0.062883</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Afghanistan</td>
+      <td>2001</td>
+      <td>0.000074</td>
+      <td>5.430027e-08</td>
+      <td>0.064753</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Afghanistan</td>
+      <td>2002</td>
+      <td>0.000072</td>
+      <td>6.385613e-08</td>
+      <td>0.063324</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Afghanistan</td>
+      <td>2003</td>
+      <td>0.000070</td>
+      <td>6.887141e-08</td>
+      <td>0.061384</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Afghanistan</td>
+      <td>2004</td>
+      <td>0.000071</td>
+      <td>5.252911e-08</td>
+      <td>0.061540</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
+</section>
+<section id="correlatieplot-emissie-en-tbl-kanker">
+<h2>Correlatieplot Emissie en TBL-kanker<a class="headerlink" href="#correlatieplot-emissie-en-tbl-kanker" title="Link to this heading">#</a></h2>
+<p>Onderstaand wordt een dataset gecreëerd met de variabelen ‘LungCancerPerCapita’, ‘EmissionsPerCapita’ en ‘Year’, deze zal worden gebruikt voor het maken van het correlatieplot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df&#39;s voor correlatieplot</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df&#39;s voor correlatieplot emissie en tbl</span>
 
 <span class="c1"># Filter data to include only years 2000-2012</span>
 <span class="n">df_lung_filtered</span> <span class="o">=</span> <span class="n">df_lung</span><span class="p">[(</span><span class="n">df_lung</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_lung</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
@@ -615,76 +752,80 @@ Discrete / Interval variabelen: Jaar</p>
 
 <span class="n">output_file_grouped</span> <span class="o">=</span> <span class="s1">&#39;csv/df/grouped_df.csv&#39;</span>
 <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_grouped</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df_grouped</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>LungCancerPerCapita</th>
+      <th>EmissionsPerCapita</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000</td>
+      <td>0.000191</td>
+      <td>0.000005</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2001</td>
+      <td>0.000192</td>
+      <td>0.000005</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2002</td>
+      <td>0.000193</td>
+      <td>0.000005</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2003</td>
+      <td>0.000195</td>
+      <td>0.000005</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2004</td>
+      <td>0.000197</td>
+      <td>0.000005</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># chloropleth rokers </span>
-
-<span class="c1"># Load the smoking data CSV file</span>
-<span class="n">smoking_file_path</span> <span class="o">=</span> <span class="s1">&#39;csv/smoking.csv&#39;</span>
-<span class="n">smoking_data</span> <span class="o">=</span> <span class="n">smoking_df</span>
-
-<span class="c1"># Load the population data CSV file</span>
-<span class="n">population_file_path</span> <span class="o">=</span> <span class="s1">&#39;csv/Population.csv&#39;</span>
-<span class="n">population_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">population_file_path</span><span class="p">)</span>
-
-<span class="c1"># Standardize country names using a mapping dictionary</span>
-<span class="n">country_name_mapping</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Russian Federation&#39;</span><span class="p">:</span> <span class="s1">&#39;Russia&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;United States of America&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;United States&#39;</span><span class="p">:</span> <span class="s1">&#39;USA&#39;</span>
-    <span class="c1"># Add other mappings if necessary</span>
-<span class="p">}</span>
-
-
-<span class="c1"># Apply country name mapping to smoking data</span>
-<span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
-
-<span class="c1"># Apply country name mapping to population data</span>
-<span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
-
-<span class="c1"># # Convert the &#39;Population&#39; column to numeric, forcing errors to NaN</span>
-<span class="c1"># population_data[&#39;PopTotal&#39;] = pd.to_numeric(population_data[&#39;PopTotal&#39;], errors=&#39;coerce&#39;)</span>
-
-<span class="c1"># Filter smoking data for the years 2000 to 2012</span>
-<span class="n">filtered_smoking_data</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
-
-<span class="c1"># Group by country and calculate the average number of smokers</span>
-<span class="n">avg_smokers</span> <span class="o">=</span> <span class="n">filtered_smoking_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
-<span class="c1"># Calculate the average population for the same period</span>
-<span class="n">filtered_population_data</span> <span class="o">=</span> <span class="n">population_data</span><span class="p">[(</span><span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">population_data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
-<span class="n">avg_population</span> <span class="o">=</span> <span class="n">filtered_population_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">)[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
-<span class="c1"># Rename columns to facilitate merging</span>
-<span class="n">avg_population</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Location&#39;</span><span class="p">:</span> <span class="s1">&#39;Country&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Merge the average smokers and average population dataframes on the country column</span>
-<span class="n">merged_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">avg_smokers</span><span class="p">,</span> <span class="n">avg_population</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
-
-<span class="c1"># Calculate smokers per capita</span>
-<span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Smokers_Per_Capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
-
-<span class="n">output_file_merged</span> <span class="o">=</span> <span class="s1">&#39;csv/df/merged_smokers_df.csv&#39;</span>
-<span class="n">merged_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_merged</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="correlatieplot-roken-en-longkanker">
+<h2>Correlatieplot roken en longkanker<a class="headerlink" href="#correlatieplot-roken-en-longkanker" title="Link to this heading">#</a></h2>
+<p>Hieronder wordt de dataset gecleaned voor de variabelen ‘Year’, ‘LungCancerPerCapita’, ‘SmokersPerCapita’ en ‘CigarettesPerCapita’. Deze zullen gebruikt worden om de correlatieplot voor deze variabelen te creëeren.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># correlatie plot roken en longkanker</span>
 
-<span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">country_name_mapping</span><span class="p">)</span>
-<span class="c1"># Filter data to include only years 2000-2012</span>
-<span class="n">df_smoking_filtered</span> <span class="o">=</span> <span class="n">smoking_data</span><span class="p">[(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2001</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">smoking_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2012</span><span class="p">)]</span>
-
 <span class="c1"># Extract relevant columns</span>
 <span class="n">df_smoking_relevant</span> <span class="o">=</span> <span class="n">df_smoking_filtered</span><span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Data.Daily cigarettes&#39;</span><span class="p">]]</span>
-
 
 <span class="c1"># Merge datasets on Country and Year</span>
 <span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_lung_relevant</span><span class="p">,</span> <span class="n">df_smoking_relevant</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
@@ -694,6 +835,7 @@ Discrete / Interval variabelen: Jaar</p>
 <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;Tracheal, bronchus, and lung cancer&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
 <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;Data.Smokers.Total&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;PopTotal&#39;</span><span class="p">]</span>
 <span class="n">df_merged</span> <span class="o">=</span> <span class="n">df_merged</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Data.Daily cigarettes&#39;</span><span class="p">:</span> <span class="s1">&#39;CigarettesPerCapita&#39;</span><span class="p">})</span>
+
 <span class="c1"># Select only the numeric columns</span>
 <span class="n">df_numeric</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;LungCancerPerCapita&#39;</span><span class="p">,</span> <span class="s1">&#39;SmokersPerCapita&#39;</span><span class="p">,</span> <span class="s1">&#39;CigarettesPerCapita&#39;</span><span class="p">]]</span>
 
@@ -702,10 +844,77 @@ Discrete / Interval variabelen: Jaar</p>
 
 <span class="n">output_file_grouped</span> <span class="o">=</span> <span class="s1">&#39;csv/df/grouped_smokers_df.csv&#39;</span>
 <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_grouped</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df_grouped</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>LungCancerPerCapita</th>
+      <th>SmokersPerCapita</th>
+      <th>CigarettesPerCapita</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000</td>
+      <td>0.000187</td>
+      <td>0.131518</td>
+      <td>18.491975</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2001</td>
+      <td>0.000189</td>
+      <td>0.130765</td>
+      <td>18.483951</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2002</td>
+      <td>0.000190</td>
+      <td>0.129956</td>
+      <td>18.470370</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2003</td>
+      <td>0.000192</td>
+      <td>0.129062</td>
+      <td>18.472222</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2004</td>
+      <td>0.000193</td>
+      <td>0.128358</td>
+      <td>18.438272</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -762,6 +971,30 @@ Discrete / Interval variabelen: Jaar</p>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Data schoonmaken</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-inladen">Data inladen</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-opschonen">Data opschonen</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vergelijking-uitstoot-en-tbl-kanker">Vergelijking uitstoot en TBL Kanker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wereldkaartplots-en-usa-india-vergelijkingsplot">Wereldkaartplots en USA/India vergelijkingsplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlatieplot-emissie-en-tbl-kanker">Correlatieplot Emissie en TBL-kanker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlatieplot-roken-en-longkanker">Correlatieplot roken en longkanker</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
