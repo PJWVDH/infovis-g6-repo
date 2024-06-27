@@ -62,7 +62,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Datastory Trachea-, bronchiën- en longkanker" href="notebook.html" />
-    <link rel="prev" title="Datastory" href="home.html" />
+    <link rel="prev" title="Inleiding" href="home.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,14 +168,13 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="home.html">
-                    Datastory
+                    Inleiding
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data schoonmaken</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebook.html">Datastory Trachea-, bronchiën- en longkanker</a></li>
-
 
 
 
@@ -413,9 +412,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-schoonmaken">
 <h1>Data schoonmaken<a class="headerlink" href="#data-schoonmaken" title="Link to this heading">#</a></h1>
-<p>In deze file worden alle dataframes per grafiek schoongemaakt en geexporteerd als csv’s, zodat de Datastory goed leesbaar blijft.</p>
-<p>De variabelen die we gebruiken zijn:
-Continuous / Ratio variabelen: Rokers, TBL-Kanker, Emissies
+<p>Voor dit project hebben we vier verschillende datasets opgeschoond en samengevoegd. Het eerste en meest uitdagende aspect van deze taak was het harmoniseren van de landnamen. Elk van de datasets gebruikte verschillende namen of codes voor landen, wat directe vergelijking onmogelijk maakte. Om dit op te lossen, hebben we een uniforme lijst van landennamen opgesteld en vervolgens een mapping uitgevoerd om de inconsistenties tussen de datasets te corrigeren. Dit zorgde ervoor dat elk land in alle datasets dezelfde naam kreeg, waardoor een nauwkeurige samensmelting mogelijk werd.
+Vervolgens hebben we alle datasets geïnspecteerd om overbodige kolommen te identificeren en te verwijderen. Deze kolommen bevatten gegevens die niet relevant waren voor onze analyse of duplicaten van informatie die al in andere kolommen aanwezig was. Door deze kolommen te verwijderen, hebben we een strakkere, beter beheersbare dataset gekregen.
+Na het opschonen van de individuele datasets, hebben we deze samengevoegd op basis van de uniforme landnamen en jaar. De datasets overlappen alleen voor een bepaalde periode van tijd. Dit is de periode van 2001 tot 2012. We hebben de datasets samengevoegd op deze jaren en overbodige jaren verwijderd. Hierdoor ontstond een enkele, geïntegreerde dataset die alle benodigde informatie bevatte zonder overbodige informatie. Deze uiteindelijke dataset bevatte alleen de relevante kolommen die we nodig hadden voor onze analyse, wat de efficiëntie en nauwkeurigheid van ons werk aanzienlijk verbeterde.</p>
+<p>Continuous / Ratio variabelen: Rokers, TBL-Kanker, Emissies
 Discrete / Nominale variabelen: Land
 Discrete / Interval variabelen: Jaar</p>
 <div class="cell docutils container">
@@ -728,7 +728,7 @@ Discrete / Interval variabelen: Jaar</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Datastory</p>
+        <p class="prev-next-title">Inleiding</p>
       </div>
     </a>
     <a class="right-next"
